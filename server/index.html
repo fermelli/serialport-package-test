@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>App</title>
+  </head>
+  <body>
+    <canvas id="myChart"></canvas>
+    <script src="/socket.io/socket.io.js" charset="utf-8"></script>
+    <script type="text/javascript">
+      const socket = io();
+
+      var ctx = document.getElementById("myChart").getContext("2d");
+      socket.on("arduino:data", function (dataSerial) {
+        console.log(dataSerial);
+      });
+    </script>
+  </body>
+</html>
