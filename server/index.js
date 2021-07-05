@@ -8,6 +8,7 @@ const server = http.createServer(app);
 const io = SocketIo(server, {});
 
 // settings
+const PORT = "COM4";
 
 // routes
 app.get("/", (req, res) => {
@@ -21,7 +22,7 @@ const SerialPort = require("serialport");
 const Readline = SerialPort.parsers.Readline;
 const parser = new Readline();
 
-const mySerial = new SerialPort("COM4", {
+const mySerial = new SerialPort(PORT, {
   baudRate: 38400,
 });
 
