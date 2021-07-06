@@ -16,15 +16,24 @@ npm install
 
 ## Funcionamiento
 
-Establecer el puerto serial a la que estara conectado la Placa Arduino
+Establecer el puerto para la aplicacion de Express
 
 ```js
 // server/index.js
-const PORT = "COM4"; // linea 11
+const PORT = 3000; //linea 11
 ```
+
+Establecer el puerto serial a la que esta conectada la Placa Arduino
+
+```js
+// server/index.js
+const SERIAL_PORT = "COM6"; // linea 12
+```
+
+Iniciar la aplicacion de Express
 
 ```console
 node server/index.js
 ```
 
-Abrir en el navegador [server/index.html](server/index.html)
+Abrir en el navegador [http://127.0.0.1:3000/](http://127.0.0.1:3000/) o en el puerto en el cual se establecio

@@ -31,7 +31,6 @@ void loop()
   visualizarValorSieteSegmentos(contador);
   if(Serial.available()>0){
     dato = Serial.read();
-    Serial.print(dato);
     if(dato == '1'){
       if(contador == 9) {
         contador = 0;
@@ -39,6 +38,7 @@ void loop()
         contador++;
       }
     }
+    Serial.print(contador);
   }
 }
 
