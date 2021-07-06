@@ -8,7 +8,8 @@ const server = http.createServer(app);
 const io = SocketIo(server, {});
 
 // settings
-const PORT = "COM4";
+const PORT = 3000;
+const SERIAL_PORT = "COM6";
 
 // routes
 app.get("/", (req, res) => {
@@ -16,14 +17,14 @@ app.get("/", (req, res) => {
 });
 
 // static files
-app.use(express.static(path.join(__dirname, "public")));
+// app.use(express.static(path.join(__dirname, "public")));
 
 const SerialPort = require("serialport");
 const Readline = SerialPort.parsers.Readline;
 const parser = new Readline();
 
-const mySerial = new SerialPort(PORT, {
-  baudRate: 38400,
+const mySerial = new SerialPort(SERIAL_PORT, {
+  baudRate: 38400, //Serial.begin(38400)
 });
 
 mySerial.pipe(parser);
@@ -33,16 +34,14 @@ mySerial.on("open", function () {
 });
 
 io.on("connection", (socket) => {
-  // socket.emit("hello", "world");
-  console.log("cliente conectado");
+  console.log("Conected Client.");
 });
 
 mySerial.on("data", function (data) {
-  console.log(data.toString());
-  // console.log(parseInt(data));
-  // console.log(data.toString());
+  let value = data.toString();
+  console.log(value);
   io.emit("arduino:data", {
-    value: data.toString(),
+    value,
   });
 });
 
@@ -50,6 +49,6 @@ mySerial.on("error", function (err) {
   console.log(err.message);
 });
 
-server.listen(3000, () => {
-  console.log("Server on port 3000");
+server.listen(PORT, () => {
+  console.log("Server on port" + PORT);
 });
